@@ -1,0 +1,8 @@
+name    'ecbypi-rails'
+version '0.1.0'
+source 'http://github.com/ecbypi/puppet-rails'
+author 'Eduardo Gutierrez'
+license 'MIT'
+summary 'Puppet Rails deploy management'
+description 'Allows you to manage your rails deploy environment'
+project_page 'http://github.com/ecbypi/puppet-rails'
