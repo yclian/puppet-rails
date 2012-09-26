@@ -34,4 +34,15 @@ describe 'rails::deploy' do
       :require => 'File[/opt/apps]'
     )
   end
+
+  describe "without params" do
+    let(:params) { Hash.new }
+    it "defaults $deploy_path to '/data'" do
+      should contain_file('/data')
+    end
+
+    it "defaults $app_user to 'deploy'" do
+      should contain_user('deploy')
+    end
+  end
 end
