@@ -27,9 +27,9 @@
 #   }
 #
 define rails::deploy(
-  $app_name = $name,
+  $app_name    = $name,
   $deploy_path = '/data',
-  $app_user = 'deploy'
+  $app_user    = 'deploy'
 ) {
 
   user { $app_user :
