@@ -65,4 +65,9 @@ define rails::unicorn(
     hasstatus => false,
     require   => Rails::Deploy[$app_name],
   }
+
+  package { 'bundler':
+    ensure   => present,
+    provider => 'gem',
+  }
 }

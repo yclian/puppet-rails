@@ -34,6 +34,13 @@ describe 'rails::unicorn' do
     )
   end
 
+  it 'installs bundler to run application' do
+    should contain_package('bundler').with(
+      :ensure => 'present',
+      :provider => 'gem'
+    )
+  end
+
   describe "without params" do
     let(:params) { Hash.new }
 
