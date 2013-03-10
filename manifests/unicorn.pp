@@ -35,7 +35,6 @@ define rails::unicorn(
   $pid_path     = "${deploy_path}/${app_name}/tmp",
   $config_path  = "${deploy_path}/${app_name}/config"
 ) {
-
   $app_root = "${deploy_path}/${app_name}"
 
   rails::deploy { $app_name :
@@ -55,7 +54,8 @@ define rails::unicorn(
 
   # We don't start the service yet since we'll have to deploy code first via
   # some other tool (puppet, capistrano, etc). That service should also be able
-  # to start the application. This is to ensure it is running after server restart.
+  # to start the application. This is to ensure it is running after server
+  # restart.
   service { "unicorn-${app_name}":
     enable    => true,
     hasstatus => false,

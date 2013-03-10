@@ -22,29 +22,29 @@ cd $APP_ROOT || exit 1
 
 case "$1" in
   start)
-	echo -n "Starting $NAME: "
-	su -c "cd $APP_ROOT && $COMMAND $COMMAND_OPTS" - deploy
-	echo "[OK]"
-	;;
+    echo -n "Starting $NAME: "
+    su -c "cd $APP_ROOT && $COMMAND $COMMAND_OPTS" - deploy
+    echo "[OK]"
+    ;;
   stop)
-	echo -n "Stopping $NAME: "
+    echo -n "Stopping $NAME: "
         kill -QUIT `cat $PID`
-	echo "[OK]"
-	;;
+    echo "[OK]"
+    ;;
   restart)
-	echo -n "Restarting $NAME: "
+    echo -n "Restarting $NAME: "
         kill -USR2 `cat $PID`
-	echo "[OK]"
-	;;
+    echo "[OK]"
+    ;;
   reload)
         echo -n "Reloading $NAME configuration: "
         kill -USR1 `cat $PID`
         echo "[OK]"
         ;;
   *)
-	echo "Usage: $NAME {start|stop|restart|reload}" >&2
-	exit 1
-	;;
+    echo "Usage: $NAME {start|stop|restart|reload}" >&2
+    exit 1
+    ;;
 esac
 
 exit 0
