@@ -14,8 +14,6 @@
 #                   "${deploy_path}/${app_name}/tmp".
 # $config_path    : Path to the unicorn config.  Defaults to
 #                   "${deploy_path}/${app_name}/config".
-# $bundle         : Whether unicorn is bundled with your application.  Affects
-#                   the generated init script. Defaults to true.
 #
 # == Requires:
 #
@@ -35,9 +33,7 @@ define rails::unicorn(
   $app_user     = 'deploy',
   $deploy_path  = '/data',
   $pid_path     = "${deploy_path}/${app_name}/tmp",
-  $config_path  = "${deploy_path}/${app_name}/config",
-  $bundle       = true,
-  $bundler_path = ''
+  $config_path  = "${deploy_path}/${app_name}/config"
 ) {
 
   $app_root = "${deploy_path}/${app_name}"

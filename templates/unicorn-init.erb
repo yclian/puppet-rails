@@ -16,13 +16,9 @@ COMMAND_OPTS="-c <%= config_path %>/unicorn.rb -E production -D"
 PID="<%= pid_path %>/unicorn.pid"
 NAME=unicorn
 
-<% if bundle -%>
 APP_ROOT="<%= app_root %>"
-COMMAND="<%= bundler_path %>bundle exec unicorn_rails"
+COMMAND="bundle exec unicorn_rails"
 cd $APP_ROOT || exit 1
-<% else -%>
-COMMAND="unicorn_rails"
-<% end -%>
 
 case "$1" in
   start)
