@@ -19,7 +19,7 @@ describe 'rails::deploy' do
 
   it "creates the group for the user" do
     should contain_group('rails').with(
-      :require => 'User[rails]',
+      :require => 'User[rails]'
     )
   end
 
