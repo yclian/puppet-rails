@@ -2,7 +2,13 @@ require 'spec_helper'
 
 describe 'rails::deploy' do
   let(:title) { 'my-app' }
-  let(:params) { { :app_name => 'my-rails-app', :deploy_path => '/opt/apps', :app_user => 'rails' } }
+  let(:params) do
+    {
+      :app_name => 'my-rails-app',
+      :deploy_path => '/opt/apps',
+      :app_user => 'rails'
+    }
+  end
 
   it "creates user for running application" do
     should contain_user('rails').with(
@@ -35,6 +41,10 @@ describe 'rails::deploy' do
     )
   end
 
+  it 'does not add database.yml if adapter is not specified' do
+    should_not contain_database('my-rails-app-db')
+  end
+
   describe "without params" do
     let(:params) { Hash.new }
     it "defaults $deploy_path to '/data'" do
@@ -43,6 +53,80 @@ describe 'rails::deploy' do
 
     it "defaults $app_user to 'deploy'" do
       should contain_user('deploy')
+    end
+  end
+
+  describe 'can manage database.yml' do
+    let(:title) { 'my-rails-app' }
+    let(:params) do
+      {
+        :rails_env => 'staging',
+        :database_adapter => 'mysql2',
+        :database_user => 'rails',
+        :database_password => 'sekrit',
+        :database_charset => 'latin1',
+        :database_host => 'db.app.com'
+      }
+    end
+
+    it 'if all required attributes are added' do
+      should contain_file('my-rails-app-database.yml').with(
+        :path => '/data/my-rails-app/shared/config/database.yml',
+        :ensure => 'present',
+        :owner => 'deploy',
+        :group => 'deploy',
+        :mode => '0644',
+        :recurse => true,
+        :require => 'File[/data/my-rails-app]'
+      )
+
+      verify_contents(
+        catalogue,
+        'my-rails-app-database.yml',
+        [
+          'staging:',
+          '  adapter: mysql2',
+          '  database: my-rails-app',
+          '  username: rails',
+          '  password: sekrit',
+          '  host: db.app.com',
+          '  encoding: latin1'
+        ]
+      )
+    end
+
+    it 'ensuring database password are present' do
+      params[:database_password] = 'UNSET'
+
+      expect do
+        should contain_file('my-rails-app-database.yml')
+      end.to raise_error Puppet::Error, /database_password is required for database.yml/
+    end
+  end
+
+  describe 'has reasonable defaults' do
+    let(:title) { 'my-rails-app' }
+    let(:params) do
+      {
+        :database_adapter => 'mysql2',
+        :database_password => 'sekrit'
+      }
+    end
+
+    it 'for database.yml' do
+      verify_contents(
+        catalogue,
+        'my-rails-app-database.yml',
+        [
+          'production:',
+          '  adapter: mysql2',
+          '  database: my-rails-app',
+          '  username: deploy',
+          '  password: sekrit',
+          '  host: localhost',
+          '  encoding: utf8'
+        ]
+      )
     end
   end
 end
