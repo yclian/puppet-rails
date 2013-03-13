@@ -1,4 +1,5 @@
 require 'spec_helper'
+require 'pry'
 
 describe 'rails::deploy' do
   let(:title) { 'my-app' }
@@ -101,6 +102,17 @@ describe 'rails::deploy' do
       expect do
         should contain_file('my-rails-app-database.yml')
       end.to raise_error Puppet::Error, /database_password is required for database.yml/
+    end
+  end
+
+  describe 'handles multiple applications run by the same user' do
+    let(:pre_condition) { "rails::deploy { 'app1': }" }
+    let(:title) { 'app2' }
+    let(:params) { Hash.new }
+
+    it 'by checking if the $app_user and $deploy_path are already defined' do
+      should contain_rails__deploy('app1')
+      should contain_rails__deploy('app2')
     end
   end
 

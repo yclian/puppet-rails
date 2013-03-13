@@ -39,24 +39,28 @@ define rails::deploy(
 ) {
   $app_path = "${deploy_path}/${app_name}"
 
-  user { $app_user :
-    ensure     => present,
-    system     => true,
-    managehome => true,
-    home       => "/home/${app_user}",
+  if ! defined(User[$app_user]) {
+    user { $app_user :
+      ensure     => present,
+      system     => true,
+      managehome => true,
+      home       => "/home/${app_user}",
+    }
+
+    group { $app_user :
+      ensure  => present,
+      require => User[$app_user],
+    }
   }
 
-  group { $app_user :
-    ensure  => present,
-    require => User[$app_user],
-  }
-
-  file { $deploy_path :
-    ensure  => directory,
-    owner   => $app_user,
-    group   => $app_user,
-    mode    => '1775',
-    require => User[$app_user],
+  if ! defined(File[$deploy_path]) {
+    file { $deploy_path :
+      ensure  => directory,
+      owner   => $app_user,
+      group   => $app_user,
+      mode    => '1775',
+      require => User[$app_user],
+    }
   }
 
   file { $app_path:
