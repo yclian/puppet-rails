@@ -1,5 +1,4 @@
 require 'spec_helper'
-require 'pry'
 
 describe 'rails::deploy' do
   let(:title) { 'my-app' }
