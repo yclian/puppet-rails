@@ -4,6 +4,7 @@ puppetversion = ENV['PUPPET_GEM_VERSION']
 
 group :development, :test do
   gem 'puppetlabs_spec_helper', :github => 'puppetlabs/puppetlabs_spec_helper', :require => false
+  gem 'pry'
 end
 
 if puppetversion
