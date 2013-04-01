@@ -62,6 +62,7 @@ describe 'rails::deploy' do
       {
         :rails_env => 'staging',
         :database_adapter => 'mysql2',
+        :database_name => 'my_rails_app_db',
         :database_user => 'rails',
         :database_password => 'sekrit',
         :database_charset => 'latin1',
@@ -86,7 +87,7 @@ describe 'rails::deploy' do
         [
           'staging:',
           '  adapter: mysql2',
-          '  database: my-rails-app',
+          '  database: my_rails_app_db',
           '  username: rails',
           '  password: sekrit',
           '  host: db.app.com',
@@ -131,7 +132,7 @@ describe 'rails::deploy' do
         [
           'production:',
           '  adapter: mysql2',
-          '  database: my-rails-app',
+          '  database: my_rails_app',
           '  username: deploy',
           '  password: sekrit',
           '  host: localhost',

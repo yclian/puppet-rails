@@ -31,6 +31,7 @@ define rails::deploy(
   $deploy_path       = '/data',
   $app_user          = 'deploy',
   $rails_env         = 'production',
+  $database_name     = 'UNSET',
   $database_host     = 'localhost',
   $database_adapter  = 'UNSET',
   $database_user     = 'UNSET',
@@ -80,6 +81,12 @@ define rails::deploy(
       $database_user_real = $app_user
     } else {
       $database_user_real = $database_user
+    }
+
+    if $database_name == 'UNSET' {
+      $database_name_real = regsubst($app_name, '-', '_', 'G')
+    } else {
+      $database_name_real = $database_name
     }
 
     file { "${app_name}-database.yml":
