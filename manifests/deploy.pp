@@ -36,7 +36,8 @@ define rails::deploy(
   $database_adapter  = 'UNSET',
   $database_user     = 'UNSET',
   $database_password = 'UNSET',
-  $database_charset  = 'utf8'
+  $database_charset  = 'utf8',
+  $database_pool     = 5
 ) {
   $app_path = "${deploy_path}/${app_name}"
 

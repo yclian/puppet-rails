@@ -66,7 +66,8 @@ describe 'rails::deploy' do
         :database_user => 'rails',
         :database_password => 'sekrit',
         :database_charset => 'latin1',
-        :database_host => 'db.app.com'
+        :database_host => 'db.app.com',
+        :database_pool => 30
       }
     end
 
@@ -91,7 +92,8 @@ describe 'rails::deploy' do
           '  username: rails',
           '  password: sekrit',
           '  host: db.app.com',
-          '  encoding: latin1'
+          '  encoding: latin1',
+          '  pool: 30'
         ]
       )
     end
@@ -136,7 +138,8 @@ describe 'rails::deploy' do
           '  username: deploy',
           '  password: sekrit',
           '  host: localhost',
-          '  encoding: utf8'
+          '  encoding: utf8',
+          '  pool: 5'
         ]
       )
     end

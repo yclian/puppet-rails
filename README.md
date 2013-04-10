@@ -33,6 +33,7 @@ rails::deploy { 'my-app':
   database_user     => 'rails_db',
   database_password => 'sekrit',
   database_charset  => 'latin1',
+  database_pool     => 12,
 }
 ```
 
