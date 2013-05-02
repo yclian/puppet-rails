@@ -74,7 +74,7 @@ describe 'rails::deploy' do
     it 'if all required attributes are added' do
       should contain_file('my-rails-app-database.yml').with(
         :path => '/data/my-rails-app/shared/config/database.yml',
-        :ensure => 'present',
+        :ensure => 'file',
         :owner => 'deploy',
         :group => 'deploy',
         :mode => '0644',

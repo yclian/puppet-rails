@@ -91,8 +91,8 @@ define rails::deploy(
     }
 
     file { "${app_name}-database.yml":
+      ensure  => file,
       path    => "${app_path}/shared/config/database.yml",
-      ensure  => present,
       owner   => $app_user,
       group   => $app_user,
       content => template('rails/database.yml.erb'),
