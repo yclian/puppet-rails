@@ -25,6 +25,7 @@ describe 'rails::deploy' do
 
   it "creates deploy area" do
     should contain_file('/opt/apps').with(
+      :ensure => 'directory',
       :owner => 'rails',
       :group => 'rails',
       :mode => '1775',
@@ -34,6 +35,7 @@ describe 'rails::deploy' do
 
   it "creates folder for the application" do
     should contain_file('/opt/apps/my-rails-app').with(
+      :ensure => 'directory',
       :owner => 'rails',
       :group => 'rails',
       :mode => '1775',
