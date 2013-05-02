@@ -73,6 +73,22 @@ describe 'rails::deploy' do
       }
     end
 
+    it 'creates the shared/config folders' do
+      should contain_file('/data/my-rails-app/shared').with(
+        :ensure => 'directory',
+        :owner => 'deploy',
+        :group => 'deploy',
+        :mode => '0775',
+      )
+
+      should contain_file('/data/my-rails-app/shared/config').with(
+        :ensure => 'directory',
+        :owner => 'deploy',
+        :group => 'deploy',
+        :mode => '0775',
+      )
+    end
+
     it 'if all required attributes are added' do
       should contain_file('my-rails-app-database.yml').with(
         :path => '/data/my-rails-app/shared/config/database.yml',
@@ -80,7 +96,6 @@ describe 'rails::deploy' do
         :owner => 'deploy',
         :group => 'deploy',
         :mode => '0644',
-        :recurse => true,
         :require => 'File[/data/my-rails-app]'
       )
 

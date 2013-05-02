@@ -90,6 +90,13 @@ define rails::deploy(
       $database_name_real = $database_name
     }
 
+    file { ["${app_path}/shared", "${app_path}/shared/config"]:
+      ensure => directory,
+      owner  => $app_user,
+      group  => $app_user,
+      mode   => '0775',
+    }
+
     file { "${app_name}-database.yml":
       ensure  => file,
       path    => "${app_path}/shared/config/database.yml",
@@ -97,7 +104,6 @@ define rails::deploy(
       group   => $app_user,
       content => template('rails/database.yml.erb'),
       mode    => '0644',
-      recurse => true,
       require => File[$app_path],
     }
   }
