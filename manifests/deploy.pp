@@ -60,7 +60,7 @@ define rails::deploy(
       ensure  => directory,
       owner   => $app_user,
       group   => $app_user,
-      mode    => '1775',
+      mode    => '0775',
       require => User[$app_user],
     }
   }
@@ -69,7 +69,7 @@ define rails::deploy(
     ensure  => directory,
     owner   => $app_user,
     group   => $app_user,
-    mode    => '1775',
+    mode    => '0775',
     require => File[$deploy_path],
   }
 

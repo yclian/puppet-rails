@@ -28,7 +28,7 @@ describe 'rails::deploy' do
       :ensure => 'directory',
       :owner => 'rails',
       :group => 'rails',
-      :mode => '1775',
+      :mode => '0775',
       :require => 'User[rails]'
     )
   end
@@ -38,7 +38,7 @@ describe 'rails::deploy' do
       :ensure => 'directory',
       :owner => 'rails',
       :group => 'rails',
-      :mode => '1775',
+      :mode => '0775',
       :require => 'File[/opt/apps]'
     )
   end
