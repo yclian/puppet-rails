@@ -78,14 +78,14 @@ describe 'rails::deploy' do
         :ensure => 'directory',
         :owner => 'deploy',
         :group => 'deploy',
-        :mode => '0775',
+        :mode => '0775'
       )
 
       should contain_file('/data/my-rails-app/shared/config').with(
         :ensure => 'directory',
         :owner => 'deploy',
         :group => 'deploy',
-        :mode => '0775',
+        :mode => '0775'
       )
     end
 
