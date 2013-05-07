@@ -53,12 +53,9 @@ define rails::deploy(
     require => User[$app_user],
   })
 
-  ensure_resource('file', $deploy_path, {
+  mkdir_p($deploy_path, {
     ensure  => directory,
-    owner   => $app_user,
-    group   => $app_user,
-    mode    => '0775',
-    require => User[$app_user],
+    mode    => '0755',
   })
 
   file { $app_path:

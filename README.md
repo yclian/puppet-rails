@@ -17,7 +17,8 @@ rails::deploy { 'my-app-name':
 ```
 
 This will setup add the user `rails` and create the directory
-`/var/www/rails/my-app-name` owned by `rails`.
+`/var/www/rails/my-app-name` owned by `rails`. If `var` or `/var/www` do not
+exist, they will be created and owned by the deploy user.
 
 ### database.yml
 

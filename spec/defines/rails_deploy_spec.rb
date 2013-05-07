@@ -24,12 +24,14 @@ describe 'rails::deploy' do
   end
 
   it "creates deploy area" do
+    should contain_file('/opt').with(
+      :ensure => 'directory',
+      :mode => '0755'
+    )
+
     should contain_file('/opt/apps').with(
       :ensure => 'directory',
-      :owner => 'rails',
-      :group => 'rails',
-      :mode => '0775',
-      :require => 'User[rails]'
+      :mode => '0755'
     )
   end
 
