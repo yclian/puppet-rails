@@ -12,11 +12,11 @@
 # Description:       starts unicorn
 ### END INIT INFO
 
-COMMAND_OPTS="-c <%= config_path %>/unicorn.rb -E production -D"
-PID="<%= pid_path %>/unicorn.pid"
+COMMAND_OPTS="-c <%= @config_path %>/unicorn.rb -E production -D"
+PID="<%= @pid_path %>/unicorn.pid"
 NAME=unicorn
 
-APP_ROOT="<%= app_root %>"
+APP_ROOT="<%= @app_root %>"
 COMMAND="bundle exec unicorn_rails"
 cd $APP_ROOT || exit 1
 
