@@ -23,7 +23,7 @@ cd $APP_ROOT || exit 1
 case "$1" in
   start)
     echo -n "Starting $NAME: "
-    su -c "cd $APP_ROOT && $COMMAND $COMMAND_OPTS" - deploy
+    su -c "cd $APP_ROOT && $COMMAND $COMMAND_OPTS" - <%= @app_user %>
     echo "[OK]"
     ;;
   stop)
